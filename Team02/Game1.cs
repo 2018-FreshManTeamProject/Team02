@@ -2,6 +2,9 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Team02.Device;
+using Team02.Util;
+using Team02.Scene;
 
 /// <summary>
 /// プロジェクト名がnamespaceとなります
@@ -17,6 +20,10 @@ namespace Team02
         // フィールド（このクラスの情報を記述）
         private GraphicsDeviceManager graphicsDeviceManager;//グラフィックスデバイスを管理するオブジェクト
         private SpriteBatch spriteBatch;//画像をスクリーン上に描画するためのオブジェクト
+        private Timer timer;
+        private TimerUI timerUI;
+        private Renderer renderer;
+        private CountDowntimer waittimer;
 
         /// <summary>
         /// コンストラクタ
@@ -28,6 +35,7 @@ namespace Team02
             graphicsDeviceManager = new GraphicsDeviceManager(this);
             //コンテンツデータ（リソースデータ）のルートフォルダは"Contentに設定
             Content.RootDirectory = "Content";
+
         }
 
         /// <summary>
@@ -36,6 +44,10 @@ namespace Team02
         protected override void Initialize()
         {
             // この下にロジックを記述
+            timer = new CountDowntimer(10);
+            timerUI = new TimerUI(timer);
+            waittimer = new CountDowntimer(3);
+
 
 
 
@@ -49,12 +61,13 @@ namespace Team02
         /// </summary>
         protected override void LoadContent()
         {
+            
             // 画像を描画するために、スプライトバッチオブジェクトの実体生成
-            spriteBatch = new SpriteBatch(GraphicsDevice);
+            renderer=new Renderer(Content,GraphicsDevice);
 
             // この下にロジックを記述
-
-
+            renderer.LoadContent("number");
+            renderer.LoadContent("timer");
             // この上にロジックを記述
         }
 
@@ -85,7 +98,14 @@ namespace Team02
             }
 
             // この下に更新ロジックを記述
+            waittimer.Update(gameTime);
+            if (!waittimer.IsTime())
+            {
+                return;
+            }
 
+            timer.Update(gameTime);
+           
             // この上にロジックを記述
             base.Update(gameTime); // 親クラスの更新処理呼び出し。絶対に消すな！！
         }
@@ -100,7 +120,16 @@ namespace Team02
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             // この下に描画ロジックを記述
-
+            renderer.Begin();
+            if (!waittimer.IsTime())
+            {
+                renderer.DrawNumber("number", new Vector2(390, 200), waittimer.Now() + 1);
+            }
+            else
+            {
+                timerUI.Draw(renderer);
+            }
+            renderer.End();
 
             //この上にロジックを記述
             base.Draw(gameTime); // 親クラスの更新処理呼び出し。絶対に消すな！！
