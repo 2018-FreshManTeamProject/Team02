@@ -18,6 +18,10 @@ namespace Team02
         private GraphicsDeviceManager graphicsDeviceManager;//グラフィックスデバイスを管理するオブジェクト
         private SpriteBatch spriteBatch;//画像をスクリーン上に描画するためのオブジェクト
 
+        private Texture2D texture;
+
+        private Vector2 velocity;
+
         /// <summary>
         /// コンストラクタ
         /// （new で実体生成された際、一番最初に一回呼び出される）
@@ -37,7 +41,7 @@ namespace Team02
         {
             // この下にロジックを記述
 
-
+            velocity = Vector2.Zero;
 
             // この上にロジックを記述
             base.Initialize();// 親クラスの初期化処理呼び出し。絶対に消すな！！
@@ -54,6 +58,10 @@ namespace Team02
 
             // この下にロジックを記述
 
+
+            texture = new Texture2D(GraphicsDevice, 1, 1);
+
+            texture.SetData(new Color[] { Color.Black });
 
             // この上にロジックを記述
         }
@@ -84,7 +92,10 @@ namespace Team02
                 Exit();
             }
 
-            // この下に更新ロジックを記述
+            
+
+
+
 
             // この上にロジックを記述
             base.Update(gameTime); // 親クラスの更新処理呼び出し。絶対に消すな！！
@@ -100,7 +111,11 @@ namespace Team02
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             // この下に描画ロジックを記述
+            spriteBatch.Begin();
 
+            spriteBatch.Draw(texture, new Rectangle(150, 150, 50, 50), Color.White);
+
+            spriteBatch.End();
 
             //この上にロジックを記述
             base.Draw(gameTime); // 親クラスの更新処理呼び出し。絶対に消すな！！
