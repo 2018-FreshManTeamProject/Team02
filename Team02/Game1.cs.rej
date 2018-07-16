@@ -1,0 +1,9 @@
+diff a/Team02/Game1.cs b/Team02/Game1.cs	(rejected hunks)
+@@ -2,6 +2,7 @@
+  using Microsoft.Xna.Framework;
+  using Microsoft.Xna.Framework.Graphics;
+  using Microsoft.Xna.Framework.Input;
+++<<<<<<< HEAD
+ +//using Team02.Device;
+ +//using Team02.Util;
+ +//using Team02.Scene;

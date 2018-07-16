@@ -5,6 +5,10 @@ using Microsoft.Xna.Framework.Input;
 //using Team02.Device;
 //using Team02.Util;
 //using Team02.Scene;
+using Team02.Device;
+using Team02.Util;
+using Team02.Scene;
+using Team02.Actor;
 
 /// <summary>
 /// プロジェクト名がnamespaceとなります
@@ -25,6 +29,9 @@ namespace Team02
         private Renderer renderer;
         private Player player;
         //private CountDowntimer waittimer;
+        private Coin coin;
+        private CountDowntimer waittimer;
+        private 
 
         /// <summary>
         /// コンストラクタ
@@ -48,6 +55,13 @@ namespace Team02
             player = new Player();
 
             player.Initialize();
+            //コインの実体生成
+            coin = new Coin();
+            //コインを初期化
+            coin.Initialize();
+            timer = new CountDowntimer(10);
+            timerUI = new TimerUI(timer);
+            waittimer = new CountDowntimer(2);
 
 
 
@@ -68,6 +82,7 @@ namespace Team02
 
             // この下にロジックを記述
             renderer.LoadContent("white");
+            renderer.LoadContent("black");
             renderer.LoadContent("number");
             renderer.LoadContent("timer");
             // この上にロジックを記述
@@ -100,6 +115,14 @@ namespace Team02
             }
 
             player.Update(gameTime);
+            // この下に更新ロジックを記述
+            waittimer.Update(gameTime);
+            if (!waittimer.IsTime())
+            {
+                return;
+            }
+            coin.Update(gameTime);
+            timer.Update(gameTime);
            
             // この上にロジックを記述
             base.Update(gameTime); // 親クラスの更新処理呼び出し。絶対に消すな！！
@@ -119,6 +142,18 @@ namespace Team02
 
             player.Draw(renderer);
 
+           
+            if (!waittimer.IsTime())
+            {
+                renderer.DrawNumber("number", new Vector2(390, 200), waittimer.Now()+1);
+                
+            }
+            else
+            {
+                timerUI.Draw(renderer);
+                coin.Draw(renderer);
+            }
+           
             renderer.End();
 
             //この上にロジックを記述
