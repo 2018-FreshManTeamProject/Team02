@@ -41,15 +41,12 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Actor\Coin.cs" />
+    <Compile Include="Actor\Character.cs" />
     <Compile Include="Device\Renderer.cs" />
     <Compile Include="Game1.cs" />
+    <Compile Include="Actor\Player.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Scene\TimerUI.cs" />
-    <Compile Include="Util\CountDowntimer.cs" />
-    <Compile Include="Util\CountUptimer.cs" />
-    <Compile Include="Util\Timer.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MonoGame.Framework">

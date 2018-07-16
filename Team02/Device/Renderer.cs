@@ -12,7 +12,7 @@ using System.Diagnostics;//Assert用
 
 
 
-namespace Team02.Device
+namespace Team02
 {
     class Renderer
     {
