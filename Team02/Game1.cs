@@ -5,6 +5,7 @@ using Microsoft.Xna.Framework.Input;
 using Team02.Device;
 using Team02.Util;
 using Team02.Scene;
+using Team02.Actor;
 
 /// <summary>
 /// プロジェクト名がnamespaceとなります
@@ -23,7 +24,9 @@ namespace Team02
         private Timer timer;
         private TimerUI timerUI;
         private Renderer renderer;
+        private Coin coin;
         private CountDowntimer waittimer;
+        private 
 
         /// <summary>
         /// コンストラクタ
@@ -44,9 +47,13 @@ namespace Team02
         protected override void Initialize()
         {
             // この下にロジックを記述
+            //コインの実体生成
+            coin = new Coin();
+            //コインを初期化
+            coin.Initialize();
             timer = new CountDowntimer(10);
             timerUI = new TimerUI(timer);
-            waittimer = new CountDowntimer(3);
+            waittimer = new CountDowntimer(2);
 
 
 
@@ -66,6 +73,7 @@ namespace Team02
             renderer=new Renderer(Content,GraphicsDevice);
 
             // この下にロジックを記述
+            renderer.LoadContent("black");
             renderer.LoadContent("number");
             renderer.LoadContent("timer");
             // この上にロジックを記述
@@ -103,7 +111,7 @@ namespace Team02
             {
                 return;
             }
-
+            coin.Update(gameTime);
             timer.Update(gameTime);
            
             // この上にロジックを記述
@@ -121,14 +129,18 @@ namespace Team02
 
             // この下に描画ロジックを記述
             renderer.Begin();
+           
             if (!waittimer.IsTime())
             {
-                renderer.DrawNumber("number", new Vector2(390, 200), waittimer.Now() + 1);
+                renderer.DrawNumber("number", new Vector2(390, 200), waittimer.Now()+1);
+                
             }
             else
             {
                 timerUI.Draw(renderer);
+                coin.Draw(renderer);
             }
+           
             renderer.End();
 
             //この上にロジックを記述
