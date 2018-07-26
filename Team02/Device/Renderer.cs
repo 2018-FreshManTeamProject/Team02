@@ -169,7 +169,9 @@ namespace Team02
             }
         }
 
-
-
+        internal void DrawTexture(string v1, Vector2 vector2, Rectangle? v2)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

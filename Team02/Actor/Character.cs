@@ -30,9 +30,10 @@ namespace Team02
         }
 
 
-        public void Draw(Renderer renderer)
+        public virtual void Draw(Renderer renderer)
         {
             renderer.DrawTexture(name, position);
         }
+
     }
 }

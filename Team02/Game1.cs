@@ -2,10 +2,8 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-//using Team02.Device;
-//using Team02.Util;
-//using Team02.Scene;
-using Team02.Device;
+using System;
+using System.Collections.Generic;
 using Team02.Util;
 using Team02.Scene;
 using Team02.Actor;
@@ -24,14 +22,16 @@ namespace Team02
         // フィールド（このクラスの情報を記述）
         private GraphicsDeviceManager graphicsDeviceManager;//グラフィックスデバイスを管理するオブジェクト
         private SpriteBatch spriteBatch;//画像をスクリーン上に描画するためのオブジェクト
-        //private Timer timer;
-        //private TimerUI timerUI;
+        private Timer timer;
+        private TimerUI timerUI;
         private Renderer renderer;
         private Player player;
-        //private CountDowntimer waittimer;
         private Coin coin;
+
+
         private CountDowntimer waittimer;
-        private 
+        private List<Character> characters;
+
 
         /// <summary>
         /// コンストラクタ
@@ -59,9 +59,25 @@ namespace Team02
             coin = new Coin();
             //コインを初期化
             coin.Initialize();
+
             timer = new CountDowntimer(10);
             timerUI = new TimerUI(timer);
             waittimer = new CountDowntimer(2);
+            characters = new List<Character>();
+            characters.Add(new Coin());
+            for (int i = 0; i < 1; i++)
+            {
+
+                characters.Add(new Coin());
+
+            }
+            foreach (var c in characters)
+            {
+                c.Initialize();
+            }
+
+
+
 
 
 
@@ -76,9 +92,9 @@ namespace Team02
         /// </summary>
         protected override void LoadContent()
         {
-            
+
             // 画像を描画するために、スプライトバッチオブジェクトの実体生成
-            renderer=new Renderer(Content,GraphicsDevice);
+            renderer = new Renderer(Content, GraphicsDevice);
 
             // この下にロジックを記述
             renderer.LoadContent("white");
@@ -108,7 +124,7 @@ namespace Team02
         protected override void Update(GameTime gameTime)
         {
             // ゲーム終了処理（ゲームパッドのBackボタンかキーボードのエスケープボタンが押されたら終了）
-            if((GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed) ||
+            if ((GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed) ||
                  (Keyboard.GetState().IsKeyDown(Keys.Escape)))
             {
                 Exit();
@@ -122,8 +138,11 @@ namespace Team02
                 return;
             }
             coin.Update(gameTime);
+
             timer.Update(gameTime);
-           
+
+
+
             // この上にロジックを記述
             base.Update(gameTime); // 親クラスの更新処理呼び出し。絶対に消すな！！
         }
@@ -140,20 +159,38 @@ namespace Team02
             // この下に描画ロジックを記述
             renderer.Begin();
 
-            player.Draw(renderer);
 
-           
+            Vector2 basePos = new Vector2(290, 150);
+
+
             if (!waittimer.IsTime())
             {
-                renderer.DrawNumber("number", new Vector2(390, 200), waittimer.Now()+1);
-                
+                renderer.DrawNumber("number", new Vector2(390, 200), waittimer.Now() + 1);
+
+
             }
             else
             {
+                for (int x = 0; x < 2; x++)
+                {
+                    for (int y = 0; y < 2; y++)
+                    {
+                        renderer.DrawTexture("black", basePos + new Vector2(100 * x, 100 * y));
+
+
+
+                    }
+                }
+
+
+                //coin.Draw(renderer);
                 timerUI.Draw(renderer);
-                coin.Draw(renderer);
+
+
+                player.Draw(renderer);
+
             }
-           
+
             renderer.End();
 
             //この上にロジックを記述
@@ -161,3 +198,4 @@ namespace Team02
         }
     }
 }
+

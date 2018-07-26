@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <SourceFile>C:/Users/sw81i/Desktop/作業/Team02/Content/black.BMP</SourceFile>
-  <SourceTime>2018-07-16T16:52:50.9742694+09:00</SourceTime>
-  <DestFile>C:/Users/sw81i/Desktop/作業/Team02/Content/bin/Windows/black.xnb</DestFile>
-  <DestTime>2018-07-19T16:49:46.1257183+09:00</DestTime>
+  <SourceFile>C:/Users/sw81i/Desktop/作業/Team02/Content/bitcoin-2546751_960_720.png</SourceFile>
+  <SourceTime>2018-07-19T15:12:32+09:00</SourceTime>
+  <DestFile>C:/Users/sw81i/Desktop/作業/Team02/Content/bin/Windows/bitcoin-2546751_960_720.xnb</DestFile>
+  <DestTime>2018-07-19T16:49:46.2468148+09:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2017-03-02T00:05:36+09:00</ImporterTime>
   <Processor>TextureProcessor</Processor>
